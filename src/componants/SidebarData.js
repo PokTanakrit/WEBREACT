@@ -10,19 +10,12 @@ export const SidebarData = [
     icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
-
-    // subNav: [
-    //   {
-    //     title: 'Page1',
-    //     path: '/Page/Page1.js',
-    //     icon: <IoIcons.IoIosPaper />
-    //   },
-    // ]
   },
+
   {
-    title: 'Page1',
-    path: '/Page/Page1.js',
-    icon: <IoIcons.IoIosPaper />
+    title: '1PowX',
+    path: '/PowX',
+    icon: <IoIcons.IoIosPaper />,
   },
   
 ];
