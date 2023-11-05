@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './form.css'; 
 
 
-class PowX extends Component {
+class Work extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,23 +13,31 @@ class PowX extends Component {
   }
 
   calculateSum() {
-    this.state.result = Math.pow(this.state.x, 4) + 2 * Math.pow(this.state.x, 3) - this.state.x + 10;
-    this.setState({
-      result: this.state.result
-    });
+    
+        
+        if( this.state.x <= 40){
+            this.setState({
+            result: this.state.result= this.state.x * 120
+            });
+        }
+        else{
+            this.setState({
+            result: this.state.result= (this.state.x-40) * 20  + (120 * 40 )
+            });
+        }
   }
   
 
   render() {
-     const { x , result} = this.state;
+     const { x } = this.state;
 
     return (
       <div>
-        <contenttext>3x^4 + 2x^3 - x + 10</contenttext>
+        <contenttext>Work Work Work</contenttext>
         <form> 
         <div>
           <label>
-            <text>Enter X : </text>
+            <text>Enter hour : </text>
             <input type="number" name="x" value={x} onChange={e => this.setState({ x: parseFloat(e.target.value) })} />
           </label>
         </div>
@@ -39,7 +47,7 @@ class PowX extends Component {
 
         <div>
           <p>Result: </p>
-          <p>{result}</p>
+          <p>{this.state.result}</p>
         </div>
 
         </form>
@@ -48,5 +56,5 @@ class PowX extends Component {
   }
 }
 
-export default PowX;
+export default Work;
 

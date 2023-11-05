@@ -7,15 +7,18 @@
 /*panel */
 form {
   position: absolute;
-  top: 35%;
+  top: 480px;
   left: 35%;
   transform: translate(-35%, -35%);
   background-color: #f2f2f2;
   padding: 60px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 900px;
 }
+
+
+
 
 label {
   font-size: 18px;
@@ -31,15 +34,15 @@ input {
 
 contenttext{
   position: absolute;
-  top: 15%;
-  left: 25%;
+  top: 10%;
+  left: 15%;
   font-size: 36px;
   font-weight: bold;
 }
 
 .btn {
   color: black;
-  padding: 10%;
+  padding: 10px;
   width: 120px;
   height: 60px;
   margin: 10px;
@@ -59,8 +62,56 @@ contenttext{
 
 text{
   position: absolute;
-  top: 10%;
+  top: 4%;
+  left: 5%;
+  font-size: 20px;
+
+}
+
+text2{
+  position: absolute;
+  top: 15%;
   left: 15%;
   font-size: 20px;
 
 }
+
+
+date1{
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  font-size: 20px;
+
+}
+
+month{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  font-size: 20px;
+
+}
+
+year{
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  font-size: 20px;
+
+}
+
+days{
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  font-size: 20px;
+
+}
+
+.result{ /* text field */
+  width: 100%;
+  height: 90px;
+  margin-top: 30px;
+  background: white;
+} 

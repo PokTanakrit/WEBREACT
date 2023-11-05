@@ -7,6 +7,8 @@ import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 
+import { Scrollbars } from 'react-custom-scrollbars';
+
 const Nav = styled.div`
   background: #15171c;
   height: 80px;
@@ -35,6 +37,26 @@ const SidebarNav = styled.nav`
   left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
   transition: 350ms;
   z-index: 10;
+  
+  /* Add custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 25px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 `;
 
 const SidebarWrap = styled.div`
@@ -56,12 +78,15 @@ const Sidebar = () => {
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
-            <NavIcon to='#'>
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
-            </NavIcon>
-            {SidebarData.map((item, index) => {
-              return <SubMenu item={item} key={index} />;
-            })}
+            <Scrollbars style={{ width: '100%', height: '100vh' }}>
+              {/* Content that you want to be scrollable */}
+              <NavIcon to='#'>
+                <AiIcons.AiOutlineClose onClick={showSidebar} />
+              </NavIcon>
+              {SidebarData.map((item, index) => (
+                <SubMenu item={item} key={index} />
+              ))}
+            </Scrollbars>
           </SidebarWrap>
         </SidebarNav>
       </IconContext.Provider>

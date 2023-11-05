@@ -13,9 +13,63 @@ export const SidebarData = [
   },
 
   {
-    title: '1PowX',
+    title: 'PowX',
     path: '/PowX',
     icon: <IoIcons.IoIosPaper />,
   },
+
+  {
+    title: 'Work',
+    path: '/Work',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Maxarr',
+    path: '/Maxarr',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Reversenum',
+    path: '/Reversenum',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Sumnumber',
+    path: '/Sumnumber',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Calender',
+    path: '/Calender',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Pointonrec',
+    path: '/Pointonrec',
+    icon: <IoIcons.IoIosPaper />,
+  },
   
+  {
+    title: 'Dance',
+    path: '/Dance',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Clock',
+    path: '/Clock',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'FuncAvg',
+    path: '/FuncAvg',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
 ];
