@@ -71,7 +71,7 @@ class Maxarr extends Component {
           </div>
           <br />
           {inputFields}
-          <button className="btn" onClick={this.calculateMax}>
+          <button className="btn"  type= "button" onClick={this.calculateMax}>
             Calculate
           </button>
 

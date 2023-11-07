@@ -115,7 +115,7 @@ class Calculate extends Component {
             </div>
           </div>
           <br />
-          <button className="btn" onClick={() => this.calculateSum()}>Calculate</button>
+          <button className="btn" type= "button" onClick={() => this.calculateSum()}>Calculate</button>
 
           <div>
             <p>Result: </p>

@@ -5,27 +5,50 @@ class Circle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: 0,
-      arr: [], // an array to store the numbers
-      result: 0, // the average result
+      x: 0,      // Number of circles
+      circles: [], // An array to store circle objects
+      result: 0,  // The count of overlapping circles
     };
   }
 
-  handleInputChange = (index, value) => {
-    const newArray = [...this.state.arr];
-    newArray[index] = parseFloat(value);
-    this.setState({ arr: newArray });
+  handleInputChange = (index, value, property) => {
+    const newCircles = [...this.state.circles];
+    newCircles[index] = {
+      ...newCircles[index],
+      [property]: parseFloat(value),
+    };
+    this.setState({ circles: newCircles });
   }
 
-  calculateAvg = () => {
-    const { arr } = this.state;
-    const sum = arr.reduce((acc, num) => acc + num, 0);
-    const average = arr.length === 0 ? 0 : sum / arr.length;
-    this.setState({ result: average });
+  calculateCircle = () => {
+    const { circles } = this.state;
+    const n = circles.length;
+    let count = 0;
+
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        if (i !== j) {
+          const circleA = circles[i];
+          const circleB = circles[j];
+
+          const dx = circleA.x - circleB.x;
+          const dy = circleA.y - circleB.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < circleA.r + circleB.r) {
+            count += 1;
+          }
+        }
+      }
+    }
+
+    this.setState({
+      result: count
+    });
   }
 
   render() {
-    const { x, arr, result } = this.state;
+    const { x, circles, result } = this.state;
 
     const inputFields = [];
 
@@ -33,13 +56,34 @@ class Circle extends Component {
       inputFields.push(
         <div key={i}>
           <label>
-            <p>Enter a number: </p>
-            <input
-              type="number"
-              name={`x-${i}`}
-              value={arr[i] || ''}
-              onChange={(e) => this.handleInputChange(i, e.target.value)}
-            />
+            <p>Enter circle {i + 1}:</p>
+            <div>
+              <label>X: </label>
+              <input
+                type="number"
+                name={`x-${i}`}
+                value={circles[i]?.x || ''}
+                onChange={(e) => this.handleInputChange(i, e.target.value, "x")}
+              />
+            </div>
+            <div>
+              <label>Y: </label>
+              <input
+                type="number"
+                name={`y-${i}`}
+                value={circles[i]?.y || ''}
+                onChange={(e) => this.handleInputChange(i, e.target.value, "y")}
+              />
+            </div>
+            <div>
+              <label>Radius: </label>
+              <input
+                type="number"
+                name={`r-${i}`}
+                value={circles[i]?.r || ''}
+                onChange={(e) => this.handleInputChange(i, e.target.value, "r")}
+              />
+            </div>
           </label>
         </div>
       );
@@ -47,27 +91,26 @@ class Circle extends Component {
 
     return (
       <div>
-        <contenttext>Function Average</contenttext>
+        <contenttext>Circle Overlap Calculator</contenttext>
         <form>
           <div>
             <label>
-              <text>How many numbers: </text>
+              <p>How many circles: </p>
               <input
                 type="number"
                 name="x"
                 value={x}
-                onChange={(e) => this.setState({ x: parseFloat(e.target.value) })}
-              />
+                onChange={(e) => this.setState({ x: parseFloat(e.target.value) })} />
             </label>
           </div>
           <br />
           {inputFields}
-          <button className="btn" onClick={this.calculateAvg}>
+          <button className="btn" type= "button"  onClick={this.calculateCircle}>
             Calculate
           </button>
-
+        
           <div>
-            <p>Value:</p>
+            <p>Number of Overlapping Circles:</p>
             <p>{result}</p>
           </div>
         </form>

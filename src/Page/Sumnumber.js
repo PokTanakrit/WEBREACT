@@ -41,7 +41,7 @@ class Sumnumber extends Component {
             </label>
           </div>
           <br />
-          <button className="btn" onClick={this.calculateReverse}>
+          <button className="btn" type= "button" onClick={this.calculateReverse}>
             Calculate
           </button>
 

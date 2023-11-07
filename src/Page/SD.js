@@ -1,27 +1,39 @@
 import React, { Component } from "react";
 import './form.css';
 
-class FuncAvg extends Component {
+class SD extends Component {
     constructor(props) {
       super(props);
       this.state = {
         x: 0,
         arr: [],
-        result: 0,
+        result: '',
         sum: 0
       };
-      this.calculateAvg = this.calculateAvg.bind(this);
+      this.calculate = this.calculate.bind(this);
     }
-  
-    calculateAvg() {
-      for (let i = 0; i < this.state.x; i++)
-      {
-        this.state.sum = this.state.sum + this.state.arr[i];
-      }
-      this.setState({
-        result: this.state.result = this.state.sum / this.state.x
-      });
+
+    calculate() {
+        const { arr, x } = this.state;
+        
+        let sum = 0;
+        for (let i = 0; i < x; i++) {
+            sum += arr[i];
+        }
+        let avg = sum / x;
+    
+        let SD = 0;
+        for (let i = 0; i < x; i++) {
+            SD += Math.pow(arr[i] - avg, 2);
+        }
+        SD = Math.sqrt(SD / (x - 1));
+    
+        this.setState({
+            result: `SD: ${SD}`,
+        });
     }
+    
+    
   
     handleInputChange = (index, value) => {
       const { arr } = this.state;
@@ -53,7 +65,7 @@ class FuncAvg extends Component {
   
       return (
         <div>
-          <contenttext>Function Average </contenttext>
+          <contenttext>Calculate SD </contenttext>
           <form>
             <div>
               <label>
@@ -68,7 +80,7 @@ class FuncAvg extends Component {
             </div>
             <br />
             {inputFields}
-            <button className="btn" type= "button" onClick={this.calculateAvg}>
+            <button className="btn" type= "button" onClick={this.calculate}>
               Calculate
             </button>
   
@@ -83,5 +95,5 @@ class FuncAvg extends Component {
     }
   }
   
-  export default FuncAvg;
+  export default SD;
   

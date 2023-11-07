@@ -42,7 +42,7 @@ class Clock extends Component {
               />
             </label>
           </div>
-
+          <br />
           <div>
             <label>
               Enter minute:
@@ -55,11 +55,12 @@ class Clock extends Component {
             </label>
           </div>
           
-          <button className="btn" onClick={this.calculatetime}>
+          <button className="btn"  type= "button" onClick={this.calculatetime}>
             Calculate
           </button>
 
-          <div className="result">
+          <div>
+          <p>Result:</p>
           <p>{result}</p>
         </div>
         </form>

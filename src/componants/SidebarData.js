@@ -72,4 +72,47 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
   },
 
+  {
+    title: 'Overlapcircle',
+    path: '/Overlapcircle',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Box',
+    path: '/Box',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Road',
+    path: '/Road',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Maxminavgsd',
+    path: '/Maxminavgsd',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  
+  {
+    title: 'SD',
+    path: '/SD',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Blackpanter',
+    path: '/Blackpanter',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
+  {
+    title: 'Nearestpoint',
+    path: '/Nearestpoint',
+    icon: <IoIcons.IoIosPaper />,
+  },
+
 ];

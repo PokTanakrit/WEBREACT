@@ -1,60 +1,43 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import './form.css'; 
 
+function Work() {
+  const [x, setX] = useState(0);
+  const [result, setResult] = useState(0);
 
-class Work extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      x: 0,
-      result: 0, 
-    };
-    this.calculateSum = this.calculateSum.bind(this);
+  const calculateSum = () => {
+    if (x <= 40) {
+      setResult(x * 120);
+    } else {
+      setResult((x - 40) * 20 + (120 * 40));
+    }
   }
 
-  calculateSum() {
-    
-        
-        if( this.state.x <= 40){
-            this.setState({
-            result: this.state.result= this.state.x * 120
-            });
-        }
-        else{
-            this.setState({
-            result: this.state.result= (this.state.x-40) * 20  + (120 * 40 )
-            });
-        }
-  }
-  
-
-  render() {
-     const { x } = this.state;
-
-    return (
-      <div>
-        <contenttext>Work Work Work</contenttext>
-        <form> 
+  return (
+    <div>
+      <contenttext>Work Work Work !!!</contenttext>
+      <form>
         <div>
           <label>
             <text>Enter hour : </text>
-            <input type="number" name="x" value={x} onChange={e => this.setState({ x: parseFloat(e.target.value) })} />
+            <input
+              type="number"
+              name="x"
+              value={x}
+              onChange={e => setX(parseFloat(e.target.value))}
+            />
           </label>
         </div>
-        <br/>
-        <button className="btn" onClick={() => this.calculateSum(this.state.x)}>Calculate</button>
-        
+        <br />
+        <button className="btn"  type= "button" onClick={calculateSum}>Calculate</button>
 
         <div>
           <p>Result: </p>
-          <p>{this.state.result}</p>
+          <p>{result}</p>
         </div>
-
-        </form>
-      </div>
-    );
-  }
+      </form>
+    </div>
+  );
 }
 
 export default Work;
-

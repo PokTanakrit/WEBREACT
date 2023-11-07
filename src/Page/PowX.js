@@ -34,7 +34,7 @@ class PowX extends Component {
           </label>
         </div>
         <br/>
-        <button className="btn" onClick={() => this.calculateSum(this.state.x)}>Calculate</button>
+        <button className="btn" type= "button" onClick={() => this.calculateSum(this.state.x)}>Calculate</button>
         
 
         <div>
