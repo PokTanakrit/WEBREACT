@@ -1,34 +1,34 @@
 import React, { Component } from "react";
 import './form.css';
+import axios from "axios";
 
 class Nearestpoint extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      x:0,
-      xArr: [],
-      yArr: [],
+      x: 1,
+      Arr: [],
       result: "",
     };
     this.calculateNearestPoints = this.calculateNearestPoints.bind(this);
+    this.getdatafromDatabase = this.getdatafromDatabase.bind(this);
   }
 
   calculateNearestPoints() {
-    const { xArr, yArr } = this.state;
-    const n = xArr.length;
-    
-    let p1, p2;
-    let minDistance = 999;
+    const { Arr, x } = this.state;
 
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = i + 1; j < n; j++) {
-        const dx = xArr[i] - xArr[j];
-        const dy = yArr[i] - yArr[j];
+    let p1, p2;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < x; i++) {
+      for (let j = i + 1; j < Arr.length; j++) {
+        const dx = Arr[i][0] - Arr[j][0];
+        const dy = Arr[i][1] - Arr[j][1];
         const distance = Math.sqrt(dx * dx + dy * dy);
         if (distance < minDistance) {
           minDistance = distance;
-          p1 = { x: xArr[i], y: yArr[i] };
-          p2 = { x: xArr[j], y: yArr[j] };
+          p1 = { x: Arr[i][0], y: Arr[i][1] };
+          p2 = { x: Arr[j][0], y: Arr[j][1] };
         }
       }
     }
@@ -38,54 +38,65 @@ class Nearestpoint extends Component {
     });
   }
 
-  handleInputChange = (index, value, property) => {
-    const { xArr, yArr } = this.state;
+  getdatafromDatabase() {
+    axios.get('http://localhost:3800/Nearestpoint')
+      .then(res => {
+        const data = res.data.Nearestpoint[0];
+        console.log(data);
 
-    if (property === "x") {
-      xArr[index] = parseFloat(value);
-    } else if (property === "y") {
-      yArr[index] = parseFloat(value);
-    }
+        if (data && data.x && data.Arr && Array.isArray(data.Arr)) {
+          this.setState({
+            x: data.x,
+            Arr: data.Arr,
+          });
+        } else {
+          console.error("Invalid data format from the API.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching data from the API:", error);
+      });
+  }
 
-    this.setState({ xArr, yArr });
+  handleInputChange = (indexi, indexj, value) => {
+    const { Arr } = this.state;
+    Arr[indexi] = Arr[indexi] || [];
+    Arr[indexi][indexj] = parseFloat(value);
+    this.setState({ Arr });
   };
 
   render() {
-    const { result, xArr, yArr ,x} = this.state;
+    const { result, Arr, x } = this.state;
 
     const inputFields = [];
 
     for (let i = 0; i < x; i++) {
-        inputFields.push(
-          <div key={i}>
-            <label>
-              <p>Enter a set (x, y): </p>
-              <input
-                type="number"
-                name={`x-${i}`}
-                placeholder="X"
-                value={xArr[i] || ''}
-                onChange={(e) => this.handleInputChange(i, e.target.value, 'x')}
-              />
-              <input
-                type="number"
-                name={`y-${i}`}
-                placeholder="Y"
-                value={yArr[i] || ''}
-                onChange={(e) => this.handleInputChange(i, e.target.value, 'y')}
-              />
-            </label>
-          </div>
-        );
-      }
+      inputFields.push(
+        <div key={i}>
+          <label>
+            <p>Enter a set (x, y): </p>
+            <input
+              type="number"
+              value={Arr[i] ? Arr[i][0] : ''}
+              onChange={(e) => this.handleInputChange(i, 0, e.target.value)}
+            />
+            <input
+              type="number"
+              value={Arr[i] ? Arr[i][1] : ''}
+              onChange={(e) => this.handleInputChange(i, 1, e.target.value)}
+            />
+          </label>
+        </div>
+      );
+    }
 
     return (
       <div>
         <contenttext>Find Nearest Points</contenttext>
         <form>
-            <div> 
+          <div>
             <label>
-              <text>How many numbers : </text>
+              <span>How many numbers : </span>
               <input
                 type="number"
                 name="x"
@@ -93,12 +104,13 @@ class Nearestpoint extends Component {
                 onChange={(e) => this.setState({ x: parseFloat(e.target.value) })}
               />
             </label>
-            </div>
-          <div>
-            {inputFields}
           </div>
+          <div>{inputFields}</div>
           <button className="btn" type="button" onClick={this.calculateNearestPoints}>
             Calculate
+          </button>
+          <button className="btn" type="button" onClick={this.getdatafromDatabase}>
+            Api
           </button>
 
           <div>

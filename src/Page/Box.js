@@ -83,8 +83,6 @@ class Box extends Component {
       <div>
         <contenttext>Can Make Box</contenttext>
         <form>
-          <div>
-          </div>
           <br />
           {inputFields}
           <button className="btn" type="button" onClick={this.calculateBox}>

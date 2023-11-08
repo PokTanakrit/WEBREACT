@@ -29,8 +29,7 @@ class Dance extends Component {
   handleInputChange = (index, value) => {
     const { arr } = this.state;
     arr[index] = parseFloat(value);
-    this.setState({ 
-    arr });
+    this.setState({ arr });
   };
 
   render() {
