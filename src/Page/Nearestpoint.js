@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import './form.css';
 import axios from "axios";
+import { Chart as ChartJS, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
+import { Scatter } from 'react-chartjs-2';
+
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 class Nearestpoint extends Component {
   constructor(props) {
@@ -9,6 +12,14 @@ class Nearestpoint extends Component {
       x: 1,
       Arr: [],
       result: "",
+      chartData: {
+        datasets: [{
+          label: 'Data',
+          data: [],
+          backgroundColor: 'red',
+          pointRadius: 5,
+        }],
+      },
     };
     this.calculateNearestPoints = this.calculateNearestPoints.bind(this);
     this.getdatafromDatabase = this.getdatafromDatabase.bind(this);
@@ -36,7 +47,16 @@ class Nearestpoint extends Component {
     this.setState({
       result: `Nearest points: (${p1.x}, ${p1.y}) and (${p2.x}, ${p2.y})`,
     });
-  }
+    this.setState(prevState => ({
+      chartData: {
+        ...prevState.chartData,
+        datasets: [{
+          ...prevState.chartData.datasets[0],
+          data: prevState.Arr,
+        }],
+      },
+    }));
+  }A
 
   getdatafromDatabase() {
     axios.get('http://localhost:3800/Nearestpoint')
@@ -63,10 +83,10 @@ class Nearestpoint extends Component {
     Arr[indexi] = Arr[indexi] || [];
     Arr[indexi][indexj] = parseFloat(value);
     this.setState({ Arr });
-  };
+  }
 
   render() {
-    const { result, Arr, x } = this.state;
+    const { result, Arr, x, chartData } = this.state;
 
     const inputFields = [];
 
@@ -114,9 +134,10 @@ class Nearestpoint extends Component {
           </button>
 
           <div>
-            <p>Result:</p>
-            <p>{result}</p>
+            <p>Result:{result}</p>
           </div>
+
+          <Scatter data={chartData} />
         </form>
       </div>
     );

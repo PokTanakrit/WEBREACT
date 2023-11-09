@@ -34,6 +34,7 @@ class Maxarr extends Component{
     const { x , arr , result} = this.state;
 
     const inputFields = [];
+    
     for(let i =0;i<x;i++){
       inputFields.push(
         <div>
@@ -50,7 +51,6 @@ class Maxarr extends Component{
         <form>
           <p>Enter Number:</p>
           <input type="number" value={x} onChange={(e) => this.setState({ x: parseFloat(e.target.value)})}/>
-
           <br/>
           {inputFields}
           <button className="btn" type="button" onClick={( ) => this.calculateMax() }>Calculate</button>
